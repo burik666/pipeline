@@ -66,8 +66,6 @@ func main() {
 }
 ```
 
----
-
 ### Producer Example
 
 Here we demonstrate a **producer stage**:
@@ -118,8 +116,6 @@ func main() {
 // 8
 ```
 
----
-
 ### Middleware Example
 
 This example shows how **middleware** can wrap stages to perform additional logic.
@@ -167,8 +163,6 @@ func main() {
 // 2
 ```
 
----
-
 ### Simple composition
 
 This pipeline demonstrates how to **combine multiple transformations**:
@@ -176,7 +170,14 @@ first, the number is doubled, then `3` is added.
 Input `4` goes through `*2 → +3` and produces `11`.
 
 ```go
-func ExampleDo_simplePipeline() {
+package main
+
+import (
+    "fmt"
+    "github.com/burik666/pipeline"
+)
+
+func main() {
     double := func(in int, next func(int) (int, error)) (int, error) {
         return next(in * 2)
     }
@@ -193,41 +194,6 @@ func ExampleDo_simplePipeline() {
     // Output: 11 (4 * 2 + 3)
 }
 ```
-
----
-
-### Producer with `Run`
-
-This test shows how to use a **producer together with `Run`**.
-The producer emits a single value (`1`), which is then transformed by the next stage (`+5`).
-The result of running the pipeline is `6`.
-
-```go
-func ExampleRun_withDefault() {
-    produceOne := func(next func(int) (int, error)) error {
-        next(1)
-        return nil
-    }
-    addFive := func(in int, next func(int) (int, error)) (int, error) {
-        return next(in + 5)
-    }
-
-    p := pipeline.New(
-        pipeline.NewProducer(produceOne),
-        pipeline.NewStage(addFive),
-    )
-
-    result, err := p.Run()
-    if err != nil {
-        panic(err)
-    }
-
-    fmt.Println(result)
-    // Output: 6
-}
-```
-
----
 
 ## License
 
