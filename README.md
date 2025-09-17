@@ -1,4 +1,7 @@
 # Pipeline
+[![Go Report Card](https://goreportcard.com/badge/github.com/burik666/pipeline)](https://goreportcard.com/report/github.com/burik666/pipeline)
+[![GitHub license](https://img.shields.io/github/license/burik666/pipeline.svg)](https://github.com/burik666/pipeline/blob/master/LICENSE)
+[![Go Reference](https://pkg.go.dev/badge/github.com/burik666/pipeline.svg)](https://pkg.go.dev/github.com/burik666/pipeline)
 
 A lightweight and flexible generic pipeline library for Go.
 It allows you to define and compose stages and producers that transform or generate data in a pipeline style.
